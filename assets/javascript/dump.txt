@@ -28,3 +28,25 @@
 		var clicked = event.target;
 		console.log(clicked);
 	});
+	
+				answerCheck = answerChecker(answers[qCounter][a]);
+			if (answerCheck == "*") {
+				answerFix(qCounter, a);
+				correctAnswer = a+1;
+			}
+			
+				function answerChecker(check) {
+		var correct;
+		if (check.indexOf("*") >0){
+			var arr = check.split("");
+			correct = arr.pop();
+			return correct;
+		} else {return;}
+	}
+	
+	function answerFix(answer, index) {
+		var fix = answers[answer][index];
+		fix = fix.slice(0,-1);
+		answers[answer][index] = fix;
+		console.log(answers[answer][index]);
+	}
