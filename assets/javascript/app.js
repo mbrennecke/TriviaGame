@@ -25,9 +25,10 @@ $(document).ready(function() {
 	var correctAnswer = ["answer2", "answer4", "answer3", "answer2", "answer3", "answer1", "answer3", "answer1", "answer4", "answer3"];
 
 	var qCounter = 0;
-	var countdown = 5;
+	var countdown = 31;
 	var intervalId;
-	
+	var right = 0;
+	var wrong = 0;
 	
 	function gameReset() {
 		qCounter = 0;
@@ -47,8 +48,12 @@ $(document).ready(function() {
 			$(".question").text("Sorry, you ran out of time. The correct answer is:");
 			setFontColorCorrect();
 			qCounter++;
+			wrong++;
 			if (qCounter < answers.length){
 				questionCorrectDisplay();
+			} else {
+				$(".question").text("");
+				$(".endGame").html("<h3>Game Over</h3><p>Correct:"+right+"</p><p>Wrong:"+wrong+"</p>");
 			}
 		}
 		
@@ -69,7 +74,7 @@ $(document).ready(function() {
           questionGen();
 		  setFontColorReset();
         }, 2000);
-		countdown = 5;
+		countdown = 30;
 	}
 	
 	function questionGen() {
@@ -85,13 +90,17 @@ $(document).ready(function() {
 	$(".answer").on("click", function () {
 		var set = "#"+correctAnswer[qCounter];
 		if (event.target.id == correctAnswer[qCounter]){
+			clearInterval(intervalId);
 			$(".question").text("That is correct!");
 			setFontColorCorrect();
 			qCounter++;
+			right++;
 		} else {
+			clearInterval(intervalId);
 			$(".question").text("Sorry, the correct answer is:");
 			setFontColorCorrect();
 			qCounter++;
+			wrong++;
 		}
 		questionCorrectDisplay();
 	});
