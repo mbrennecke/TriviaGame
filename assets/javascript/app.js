@@ -11,17 +11,54 @@ $(document).ready(function() {
 	"What is the seventh planet from the sun?",
 	"Who invented the rabies vaccination?"];
 
-	var answers = [["Dom Perignon", "Abbot Morris", "Pope Pius", "Don Amici"],
-	["Lake Superior", "Lake Geneva", "Lake Victoria", "Lake Huron"],
-	["The Moon", "Mars", "Texas", "Tatoine"],
-	["A farrier", "A ferrier", "An ironmonger", "A terrier"],
-	["A Mackintosh", "An Apple", "A Cardigan", "A Haggis"],
-	["A sword", "A computer", "A coat", "An umbrella"],
-	["String", "Sweater", "Green", "Mock"],
-	["Dictionary", "Thesaurus", "Tyrannasaurus", "Day planner"],
-	["Uranus", "Pluto", "Jupiter", "Mercury"],
-	["Louis Pasteur", "Louis Armstrong", "Marie Curie", "Albert Einstein"]];
+	var answers = [["Abbot Morris", "Dom Perignon*", "Pope Pius", "Don Amici"],
+	["Lake Geneva", "Lake Victoria", "Lake Huron", "Lake Superior*"],
+	["Mars", "Texas", "The Moon*", "Tatoine"],
+	["A ferrier", "A farrier*", "An ironmonger", "A terrier"],
+	["An Apple", "A Cardigan", "A Mackintosh*", "A Haggis"],
+	["A sword*", "A computer", "A coat", "An umbrella"],
+	["Sweater", "String*", "Green", "Mock"],
+	["Dictionary*", "Thesaurus", "Tyrannasaurus", "Day planner"],
+	["Pluto", "Jupiter", "Mercury", "Uranus*"],
+	["Louis Armstrong", "Marie Curie", "Louis Pasteur*", "Albert Einstein"]];
 
+	var qCounter = 0;
+	var correctAnswer;
 	
+	function reset() {
+		qCounter = 0;
+		correctAnswer = "";
+	}
+	
+	function answerChecker(check) {
+		var correct;
+		if (check.indexOf("*") >0){
+			var arr = check.split("");
+			correct = arr.pop();
+			return correct;
+		} else {return;}
+	}
+	
+	function answerFix(answer, index) {
+		var fix = answers[answer][index];
+		fix = fix.slice(0,-1);
+		answers[answer][index] = fix;
+		console.log(answers[answer][index]);
+	}
+	
+	function questionGen() {
+		$(".question").text(questions[qCounter]);
+		for (var a=0; a<4; a++) {
+			answerCheck = answerChecker(answers[qCounter][a]);
+			if (answerCheck == "*") {
+				answerFix(qCounter, a);
+				correctAnswer = a+1;
+			}
+			var answer = '#answer' + (a + 1);
+			$(answer).text(answers[qCounter][a]);
+		}
+	}
 
+	questionGen();
+	
 });

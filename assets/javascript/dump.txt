@@ -14,3 +14,17 @@
 	}
 	
 	questionAsker();
+	
+	for (var a=0; a<4; a++) {
+			var answerLocal = answers[qCounter][a];
+			var correct = correctAnswerGen(answerLocal);
+			answer = '#answer' + (a + 1);
+				
+			$(answer).text(answers[qCounter][a]);
+				
+		}
+		
+		$(answer).click(function(event) {
+		var clicked = event.target;
+		console.log(clicked);
+	});
