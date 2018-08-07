@@ -1,0 +1,16 @@
+	function questionAsker(){
+		for (var q=0; q<10; q++) {
+			$(".question").text(questions[q]);
+			var answer = "";
+			for (var a=0; a<4; a++) {
+				answer = '#answer' + (a + 1);
+				$(answer).text(answers[q][a]);
+			}
+			$(".answer").click(function(event) {
+				var clicked = event.target;
+				console.log(clicked);
+			});
+		}
+	}
+	
+	questionAsker();

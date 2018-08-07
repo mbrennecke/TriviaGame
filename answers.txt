@@ -1,0 +1,10 @@
+["Dom Perignon", "Abbot Morris", "Pope Pius", "Don Amici"],
+["Lake Superior", "Lake Geneva", "Lake Victoria", "Lake Huron"],
+["The Moon", "Mars", "Texas", "Tatoine"],
+["A farrier", "A ferrier", "An ironmonger", "A terrier"],
+["A Mackintosh", "An Apple", "A Cardigan", "A Haggis"],
+["A sword", "A computer", "A coat", "An umbrella"],
+["String", "Sweater", "Green", "Mock"],
+["Dictionary", "Thesaurus", "Tyrannasaurus", "Day planner"],
+["Uranus", "Pluto", "Jupiter", "Mercury"],
+["Louis Pasteur", "Louis Armstrong", "Marie Curie", "Albert Einstein"]
