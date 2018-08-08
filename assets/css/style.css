@@ -10,3 +10,13 @@ li:hover {
 	color: #ff5733;
 	cursor: pointer;
 }
+
+.btn {
+	margin-top:20px;
+	background-color: #ffc300;
+	color: #571845;
+}
+
+.btn-primary:hover {
+	background-color: #571845;
+}

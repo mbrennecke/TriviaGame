@@ -30,8 +30,15 @@ $(document).ready(function() {
 	var right = 0;
 	var wrong = 0;
 	
+	function gameStart(){
+		$(".endGame").html('<br><br><button type="button" class="btn btn-primary btn-lg btn-block">Play?</button>');
+		}
+	
+	
 	function gameReset() {
 		qCounter = 0;
+		right = 0;
+		wrong = 0;
 		questionGen();
 	}
 	
@@ -52,12 +59,13 @@ $(document).ready(function() {
 			if (qCounter < answers.length){
 				questionCorrectDisplay();
 			} else {
-				$(".question").text("");
-				$(".endGame").html("<h3>Game Over</h3><p>Correct:"+right+"</p><p>Wrong:"+wrong+"</p>");
+				
 			}
-		}
-		
-		
+		}	
+	}
+	
+	function setAnswersList() {
+		$(".endGame").html('<ul><li id="answer1" class="answer "></li><li id="answer2" class="answer "></li><li id="answer3" class="answer "></li><li id="answer4" class="answer "></li></ul>')
 	}
 	
 	function setFontColorCorrect() {
@@ -66,38 +74,47 @@ $(document).ready(function() {
 	}
 	
 	function setFontColorReset() {
-		$(".answer").css("color", "#212529");	
+		$(".answer").css("color", "#212529");
 	}
 	
 	function questionCorrectDisplay() {
 		var delay2 = setTimeout(function() {
           questionGen();
 		  setFontColorReset();
+		  
         }, 2000);
-		countdown = 30;
+		countdown = 31;
 	}
 	
 	function questionGen() {
+		if (qCounter < questions.length){
 		$(".question").text(questions[qCounter]);
-		for (var a=0; a<4; a++) {
-			var answer = '#answer' + (a + 1);
-			$(answer).text(answers[qCounter][a]);
-			setFontColorReset();
-		}
+			for (var a=0; a<4; a++) {
+				var answer = '#answer' + (a + 1);
+				$(answer).text(answers[qCounter][a]);
+				setFontColorReset();
+			}
+			$("#questionNum").text(qCounter+1);
+		
 		run();
+		$(".answer").css("pointer-events", "auto");
+		} else {$(".question").text("");
+				$(".endGame").html('<h3>Game Over</h3><h3>Correct:'+right+'<//h3><h3>Wrong:'+wrong+'</h3><button type="button" class="btn btn-primary btn-lg btn-block">Play Again?</button>');}
 	}
 	
-	$(".answer").on("click", function () {
+	$(document).on("click", ".answer", function () {
 		var set = "#"+correctAnswer[qCounter];
 		if (event.target.id == correctAnswer[qCounter]){
 			clearInterval(intervalId);
 			$(".question").text("That is correct!");
+			$(".answer").css("pointer-events", "none");
 			setFontColorCorrect();
 			qCounter++;
 			right++;
 		} else {
 			clearInterval(intervalId);
 			$(".question").text("Sorry, the correct answer is:");
+			$(".answer").css("pointer-events", "none");
 			setFontColorCorrect();
 			qCounter++;
 			wrong++;
@@ -105,8 +122,13 @@ $(document).ready(function() {
 		questionCorrectDisplay();
 	});
 	
-	
+	$(document).on('click', '.btn', function () {
+		setAnswersList();
+		questionCorrectDisplay();
+		gameReset();
+	});
 
-	gameReset();
+		
+	gameStart();
 	
 });
