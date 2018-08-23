@@ -14,3 +14,6 @@ This project is useful for learning javascript and jQuery timers and manual loop
 
 This project is maintained by Matthew Brennecke mbrennecke10@gmail.com
 
+## Link to this project
+
+https://mbrennecke.github.io/TriviaGame/
